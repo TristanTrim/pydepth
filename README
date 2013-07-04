@@ -1,0 +1,30 @@
+
+
+Hullo hallo hello.
+
+This is our (me and 'd.a's) attempt at a program to get depth information from photographs, and then convert them to 3d pointclouds/models.
+It is written in python, and requires the following modules:
+
+	numpy
+
+	matplotlib
+
+	scipy
+
+	os
+
+	argparse
+
+
+
+right now the fuctionality is limited, but to run it, just type:
+
+~]$ python path/to/main.py path/to/image.jpg
+
+
+
+lucks!
+
+
+
+the information here may not be compleat or accurate as I have not slept.
