@@ -7,7 +7,7 @@ started by Trist on july 04 at 1:14 in the am.
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
-
+import __main__
 
 #function takes image and returns luminosity array
 def lumcalc(imagearray):
@@ -22,7 +22,7 @@ def lumcalc(imagearray):
 	
 	#samplemode:::
 	samplemode=True
-	if samplemode:
+	if __main__.args.test: 
 		#set xy size of sample
 		#####samplesize=[500,500]
 		#define sample from image
