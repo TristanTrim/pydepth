@@ -31,7 +31,8 @@ for i in filepaths:
 #	if args.raw:
 		#plt.imshow(imagearray[0][1:22,1:22])
 
-for i in locallum.lumcalc(imagearray):
+localarray = locallum.lumcalc(imagearray)
+
+for i in localarray:
 	plt.imshow(i)
-	print (i)
 plt.show()
