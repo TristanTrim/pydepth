@@ -15,42 +15,60 @@ import __main__
 
 def lumcalc(imagearray):
 	
-	#useful variables
-	arraysize = imagearray[0].shape
-	samplesize=[600,400]
+	######useful variables
+	
+	###get size value of the images in imagearray
+	imagearray_imagesize=[]
+	for i in imagearray:
+		imagearray_imagesize.append(i.shape)
+	#print(imagearray_imagesize[0][0])
+	testsize=[300,400]
+	
 	lumsample=[range(-1,2),range(-1,2)]
 	#for i in lumsample[0]:
 	#	print(str(i))
 
-	#if --test is on then only do one image, at samplesize.
+
+###this next if loop will neet to be in a loop of images for multiple images
+
+	###for simulated for loop, we can change this lator.
+	imageNumber=0
+
+	input_image=[]
+	#if --test is on then only do one image, at testsize.
 	if __main__.args.test: 
 		#set xy size of sample
 		#define sample from image
-		imsample=imagearray[0][arraysize[0]/2-samplesize[0]/2:arraysize[0]/2+samplesize[0],arraysize[1]/2-samplesize[1]:arraysize[1]/2+samplesize[1]]
+		input_image.append(imagearray[imageNumber][imagearray_imagesize[imageNumber][0]/2-testsize[0]/2:imagearray_imagesize[imageNumber][0]/2+testsize[0]/2,imagearray_imagesize[imageNumber][1]/2-testsize[1]/2:imagearray_imagesize[imageNumber][1]/2+testsize[1]/2])
+		##set imagearray_imagesize to the new images size
+		imagearray_imagesize[imageNumber]=input_image[imageNumber].shape###this only needs to  be done because the test size is smaller then the regular image.
+
 	#else define imsample from full image:::
 	else:
-		imsample=imagearray[0]
-		for i in(0,1):
-			samplesize[i]=arraysize[i]
+		input_image=imagearray
+		#input_image[imageNumber].append(imagearray[imageNumber])
+		#for i in(0,1):
+			#samplesize[i]=arraysize[i]###Im not sure what this was supposed to do...oh, it was supposed to get the imagesize for creating the new image that data would be written to.
 	
 	
 	#generate array full of zeros for the calculations
-	luminescence=np.zeros((samplesize[0],samplesize[1],3))
+	print(imagearray_imagesize[imageNumber][0])
+	luminescence=np.zeros((imagearray_imagesize[imageNumber][0],imagearray_imagesize[imageNumber][1],3))
 	lumarray=[]	
 	#Runs through every image that's passed to the command line (imagearray)
 	for image in imagearray:
-		print(image)
+		#print(image)
 		##tells it to work with pixel data that's one pixel away from the edges, this way you're never trying to get something that doesn't exist in your 3*3 sample.
-		for i in range(1,samplesize[0]-1):
+		for i in range(1,imagearray_imagesize[imageNumber][0]-1):
 			#luminescence+=[]
-			for j in range(1,samplesize[1]-1):
+			for j in range(1,imagearray_imagesize[imageNumber][1]-1):
 				for a in lumsample[0]:
 					for b in lumsample[1]:
-						luminescence[i,j]+=imsample[i+a,j+b]
-			luminescence[i,j]=imsample[i,j]-(luminescence[i,j]/(len(lumsample[0])*len(lumsample[1])))
+						luminescence[i,j]+=input_image[imageNumber][i+a,j+b]
+			luminescence[i,j]=input_image[imageNumber][i,j]-(luminescence[i,j]/(len(lumsample[0])*len(lumsample[1])))
 					#for k in range(1,3):
 				#imsample[i,j][test]=imsample[i,j][test]=0
-			print("Currently on the "+str(i)+"irstest line of "+str(arraysize[1]), end='\r')
+			print("Currently on the "+str(i)+"irstest line of "+str(imagearray_imagesize[imageNumber][0])+" on the "+str(imageNumber)+"eth image", end='\r')
 		lumarray.append(luminescence)
 	return(lumarray)
-
+#####in case I forget, luminescence is not interacting with imageNumber at all, so it would output the last image rendered only... this would suck.
