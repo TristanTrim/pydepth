@@ -21,42 +21,47 @@ def lumcalc(imagearray):
 	imagearray_imagesize=[]
 	for i in imagearray:
 		imagearray_imagesize.append(i.shape)
-	#print(imagearray_imagesize[0][0])
-	testsize=[300,400]
+	print(imagearray_imagesize[0])
+	testsize=[400,300]##in format: [y,x]..... Ill fix it if it ever becomes a problem.
 	
 	lumsample=[range(-1,2),range(-1,2)]
 	#for i in lumsample[0]:
 	#	print(str(i))
 
+	input_image=[]
+
 
 ###this next if loop will neet to be in a loop of images for multiple images
 
+	
 	###for simulated for loop, we can change this lator.
-	imageNumber=0
+	###the for loop is no longer simulated...
+	imageNumberLoop=(len(imagearray))
+	for imageNumber in range(0,imageNumberLoop):
+		#print(str(imageNumber)+"####!!!!%$%$%$%$%")
 
-	input_image=[]
-	#if --test is on then only do one image, at testsize.
-	if __main__.args.test: 
-		#set xy size of sample
-		#define sample from image
-		input_image.append(imagearray[imageNumber][imagearray_imagesize[imageNumber][0]/2-testsize[0]/2:imagearray_imagesize[imageNumber][0]/2+testsize[0]/2,imagearray_imagesize[imageNumber][1]/2-testsize[1]/2:imagearray_imagesize[imageNumber][1]/2+testsize[1]/2])
-		##set imagearray_imagesize to the new images size
-		imagearray_imagesize[imageNumber]=input_image[imageNumber].shape###this only needs to  be done because the test size is smaller then the regular image.
+		#if --test is on then only do one image, at testsize.
+		if __main__.args.test: 
+			#set xy size of sample
+			#define sample from image
+			input_image.append(imagearray[imageNumber][imagearray_imagesize[imageNumber][0]/2-testsize[0]/2:imagearray_imagesize[imageNumber][0]/2+testsize[0]/2,imagearray_imagesize[imageNumber][1]/2-testsize[1]/2:imagearray_imagesize[imageNumber][1]/2+testsize[1]/2])
+			##set imagearray_imagesize to the new images size
+			imagearray_imagesize[imageNumber]=input_image[imageNumber].shape###this only needs to  be done because the test size is smaller then the regular image.
 
-	#else define imsample from full image:::
-	else:
-		input_image=imagearray
-		#input_image[imageNumber].append(imagearray[imageNumber])
-		#for i in(0,1):
-			#samplesize[i]=arraysize[i]###Im not sure what this was supposed to do...oh, it was supposed to get the imagesize for creating the new image that data would be written to.
+		#else define imsample from full image:::
+		else:
+			input_image=imagearray
+			#input_image[imageNumber].append(imagearray[imageNumber])
+			#for i in(0,1):
+				#samplesize[i]=arraysize[i]###Im not sure what this was supposed to do...oh, it was supposed to get the imagesize for creating the new image that data would be written to.
 	
 	
-	#generate array full of zeros for the calculations
-	print(imagearray_imagesize[imageNumber][0])
-	luminescence=np.zeros((imagearray_imagesize[imageNumber][0],imagearray_imagesize[imageNumber][1],3))
-	lumarray=[]	
-	#Runs through every image that's passed to the command line (imagearray)
-	for image in imagearray:
+		###generate array full of zeros for the calculations
+		print(imagearray_imagesize[imageNumber][0])
+		luminescence=np.zeros((imagearray_imagesize[imageNumber][0],imagearray_imagesize[imageNumber][1],3))
+		lumarray=[]	
+		#Runs through every image that's passed to the command line (imagearray)
+	#for image in imagearray:
 		#print(image)
 		##tells it to work with pixel data that's one pixel away from the edges, this way you're never trying to get something that doesn't exist in your 3*3 sample.
 		for i in range(1,imagearray_imagesize[imageNumber][0]-1):
