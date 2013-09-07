@@ -23,7 +23,6 @@ args = parser.parse_args()
 for i in  args.files:
 	filepaths.append(os.path.abspath(i))
 
-
 for i in filepaths:
 	print (i)
 	imagearray.append(misc.imread(i))
@@ -32,9 +31,8 @@ for i in filepaths:
 #	if args.raw:
 		#plt.imshow(imagearray[0][1:22,1:22])
 
-#for i in locallum.lumcalc(imagearray):
-#	plt.imshow(i)
-#	print (i)
-#plt.show()
+localarray = locallum.lumcalc(imagearray)
 
-plt.imshow(locallum.lumcalc(imagearray[0]))
+for i in localarray:
+	plt.imshow(i)
+plt.show()

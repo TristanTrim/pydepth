@@ -1,1 +1,1 @@
-Requires scipy, numpy, matplotlib
+Requires scipy, numpy, matplotlib, python3-pillow

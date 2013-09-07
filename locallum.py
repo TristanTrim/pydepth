@@ -50,7 +50,7 @@ def lumcalc(imagearray):
 			luminescence[i,j]=imsample[i,j]-(luminescence[i,j]/(len(lumsample[0])*len(lumsample[1])))
 					#for k in range(1,3):
 				#imsample[i,j][test]=imsample[i,j][test]=0
-			print("Currently on the "+str(i)+"stest line!", end='\r')
+			print("Currently on the "+str(i)+"irstest line of "+str(arraysize[1]), end='\r')
 		lumarray.append(luminescence)
 	return(lumarray)
 
